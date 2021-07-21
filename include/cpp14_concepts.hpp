@@ -23,6 +23,7 @@ using std::signed_integral;
 using std::unsigned_integral;
 using std::floating_point;
 using std::destructible;
+using std::constructible_from;
 
 }	// namespace cpp14_concepts
 
@@ -55,6 +56,10 @@ constexpr bool floating_point = std::is_floating_point<T>::value;
 
 template <typename T>
 constexpr bool destructible = std::is_nothrow_destructible<T>::value;
+
+template <typename T, typename... Args>
+constexpr bool constructible_from =
+	destructible<T> && std::is_constructible<T, Args...>::value;
 
 }	// namespace cpp14_concepts
 
