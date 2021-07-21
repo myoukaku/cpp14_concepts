@@ -8,7 +8,7 @@
 
 #include <cpp14_concepts.hpp>
 
-namespace integral_test
+namespace floating_point_test
 {
 
 static_assert(cpp14_concepts::floating_point<signed char>    == false, "");
@@ -38,4 +38,4 @@ static_assert(cpp14_concepts::floating_point<int*>  == false, "");
 static_assert(cpp14_concepts::floating_point<int&>  == false, "");
 static_assert(cpp14_concepts::floating_point<int&&> == false, "");
 
-}	// namespace integral_test
+}	// namespace floating_point_test

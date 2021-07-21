@@ -17,6 +17,7 @@ namespace cpp14_concepts
 {
 
 using std::same_as;
+using std::derived_from;
 using std::integral;
 using std::signed_integral;
 using std::unsigned_integral;
@@ -33,6 +34,11 @@ namespace cpp14_concepts
 
 template <typename T, typename U>
 constexpr bool same_as = std::is_same<T, U>::value;
+
+template <typename Derived, typename Base>
+constexpr bool derived_from =
+	std::is_base_of<Base, Derived>::value &&
+	std::is_convertible<const volatile Derived*, const volatile Base*>::value;
 
 template <typename T>
 constexpr bool integral = std::is_integral<T>::value;

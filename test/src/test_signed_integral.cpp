@@ -8,7 +8,7 @@
 
 #include <cpp14_concepts.hpp>
 
-namespace integral_test
+namespace signed_integral_test
 {
 
 static_assert(cpp14_concepts::signed_integral<signed char>    == true, "");
@@ -38,4 +38,4 @@ static_assert(cpp14_concepts::signed_integral<int*>  == false, "");
 static_assert(cpp14_concepts::signed_integral<int&>  == false, "");
 static_assert(cpp14_concepts::signed_integral<int&&> == false, "");
 
-}	// namespace integral_test
+}	// namespace signed_integral_test
