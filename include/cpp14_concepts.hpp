@@ -20,6 +20,7 @@ using std::same_as;
 using std::integral;
 using std::signed_integral;
 using std::unsigned_integral;
+using std::floating_point;
 
 }	// namespace cpp14_concepts
 
@@ -41,6 +42,9 @@ constexpr bool signed_integral = integral<T> && std::is_signed<T>::value;
 
 template <typename T>
 constexpr bool unsigned_integral = integral<T> && !signed_integral<T>;
+
+template <typename T>
+constexpr bool floating_point = std::is_floating_point<T>::value;
 
 }	// namespace cpp14_concepts
 
