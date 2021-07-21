@@ -18,6 +18,7 @@ namespace cpp14_concepts
 
 using std::same_as;
 using std::integral;
+using std::signed_integral;
 
 }	// namespace cpp14_concepts
 
@@ -33,6 +34,9 @@ constexpr bool same_as = std::is_same<T, U>::value;
 
 template <typename T>
 constexpr bool integral = std::is_integral<T>::value;
+
+template <typename T>
+constexpr bool signed_integral = integral<T> && std::is_signed<T>::value;
 
 }	// namespace cpp14_concepts
 
