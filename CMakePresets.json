@@ -1,0 +1,165 @@
+﻿{
+	"version": 2,
+	"cmakeMinimumRequired": {
+		"major": 3,
+		"minor": 20,
+		"patch": 0
+	},
+	"configurePresets": [
+		{
+			"name": "base",
+			"hidden": true,
+			"generator": "Ninja",
+			"binaryDir": "${sourceDir}/build/${presetName}",
+			"cacheVariables": {
+				"CMAKE_INSTALL_PREFIX": "${sourceDir}/install/${presetName}"
+			}
+		},
+
+		// target
+		{
+			"name": "windows",
+			"inherits": [ "base" ],
+			"hidden": true,
+			"vendor": {
+				"microsoft.com/VisualStudioSettings/CMake/1.0": {
+					"hostOS": [ "Windows" ]
+				}
+			}
+		},
+		{
+			"name": "linux",
+			"inherits": [ "base" ],
+			"hidden": true,
+			"vendor": {
+				"microsoft.com/VisualStudioSettings/CMake/1.0": {
+					"hostOS": [ "Linux" ]
+				}
+			}
+		},
+
+		// toolset
+		{
+			"name": "msvc",
+			"hidden": true,
+			"cacheVariables": {
+				"CMAKE_C_COMPILER": "cl",
+				"CMAKE_CXX_COMPILER": "cl"
+			}
+		},
+		{
+			"name": "clang-cl",
+			"hidden": true,
+			"cacheVariables": {
+				"CMAKE_C_COMPILER": "clang-cl",
+				"CMAKE_CXX_COMPILER": "clang-cl"
+			},
+			"vendor": {
+				"microsoft.com/VisualStudioSettings/CMake/1.0": {
+					"intelliSenseMode": "windows-clang"
+				}
+			}
+		},
+		{
+			"name": "clang",
+			"hidden": true,
+			"cacheVariables": {
+				"CMAKE_C_COMPILER": "clang",
+				"CMAKE_CXX_COMPILER": "clang++"
+			},
+			"vendor": {
+				"microsoft.com/VisualStudioSettings/CMake/1.0": {
+					"intelliSenseMode": "windows-clang"
+				}
+			}
+		},
+		{
+			"name": "gcc",
+			"hidden": true,
+			"cacheVariables": {
+				"CMAKE_C_COMPILER": "gcc",
+				"CMAKE_CXX_COMPILER": "g++"
+			},
+			"vendor": {
+				"microsoft.com/VisualStudioSettings/CMake/1.0": {
+					"intelliSenseMode": "linux-gcc"
+				}
+			}
+		},
+
+		// CMAKE_CXX_STANDARD
+		{
+			"name": "c++14",
+			"hidden": true,
+			"cacheVariables": {
+				"CMAKE_CXX_STANDARD": "14"
+			}
+		},
+		{
+			"name": "c++17",
+			"hidden": true,
+			"cacheVariables": {
+				"CMAKE_CXX_STANDARD": "17"
+			}
+		},
+		{
+			"name": "c++20",
+			"hidden": true,
+			"cacheVariables": {
+				"CMAKE_CXX_STANDARD": "20"
+			}
+		},
+
+		{
+			"name": "win-msvc-c++14",
+			"inherits": [ "windows", "msvc", "c++14" ]
+		},
+		{
+			"name": "win-msvc-c++17",
+			"inherits": [ "windows", "msvc", "c++17" ]
+		},
+		{
+			"name": "win-msvc-c++20",
+			"inherits": [ "windows", "msvc", "c++20" ]
+		},
+
+		{
+			"name": "win-clang-c++14",
+			"inherits": [ "windows", "clang-cl", "c++14" ]
+		},
+		{
+			"name": "win-clang-c++17",
+			"inherits": [ "windows", "clang-cl", "c++17" ]
+		},
+		{
+			"name": "win-clang-c++20",
+			"inherits": [ "windows", "clang-cl", "c++20" ]
+		},
+
+		{
+			"name": "linux-gcc-c++14",
+			"inherits": [ "linux", "gcc", "c++14" ]
+		},
+		{
+			"name": "linux-gcc-c++17",
+			"inherits": [ "linux", "gcc", "c++17" ]
+		},
+		{
+			"name": "linux-gcc-c++20",
+			"inherits": [ "linux", "gcc", "c++20" ]
+		},
+
+		{
+			"name": "linux-clang-c++14",
+			"inherits": [ "linux", "clang", "c++14" ]
+		},
+		{
+			"name": "linux-clang-c++17",
+			"inherits": [ "linux", "clang", "c++17" ]
+		},
+		{
+			"name": "linux-clang-c++20",
+			"inherits": [ "linux", "clang", "c++20" ]
+		}
+	]
+}
