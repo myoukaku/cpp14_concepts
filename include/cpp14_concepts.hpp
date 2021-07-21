@@ -22,6 +22,7 @@ using std::integral;
 using std::signed_integral;
 using std::unsigned_integral;
 using std::floating_point;
+using std::destructible;
 
 }	// namespace cpp14_concepts
 
@@ -51,6 +52,9 @@ constexpr bool unsigned_integral = integral<T> && !signed_integral<T>;
 
 template <typename T>
 constexpr bool floating_point = std::is_floating_point<T>::value;
+
+template <typename T>
+constexpr bool destructible = std::is_nothrow_destructible<T>::value;
 
 }	// namespace cpp14_concepts
 
