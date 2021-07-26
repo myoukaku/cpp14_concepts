@@ -33,6 +33,7 @@ namespace cpp14_concepts
 
 using std::same_as;
 using std::derived_from;
+using std::convertible_to;
 using std::integral;
 using std::signed_integral;
 using std::unsigned_integral;
@@ -102,6 +103,28 @@ public:
 template <typename T>
 constexpr bool default_initializable =
 	default_initializable_t<T>::type::value;
+
+template <typename From, typename To>
+struct convertible_to_t
+{
+private:
+	template <typename F, typename T,
+		typename = std::enable_if_t<std::is_convertible<F, T>::value>,
+		typename Func = std::add_rvalue_reference_t<F> (&)(),
+		typename = decltype(static_cast<T>(std::declval<Func>()()))
+	>
+	static auto test(int) -> std::true_type;
+
+	template <typename F, typename T>
+	static auto test(...) -> std::false_type;
+
+public:
+	using type = decltype(test<From, To>(0));
+};
+
+template <typename From, typename To>
+constexpr bool convertible_to =
+	convertible_to_t<From, To>::type::value;
 
 }	// namespace cpp14_concepts
 
