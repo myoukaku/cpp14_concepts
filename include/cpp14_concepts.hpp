@@ -42,6 +42,7 @@ using std::destructible;
 using std::constructible_from;
 using std::default_initializable;
 using std::move_constructible;
+using std::copy_constructible;
 
 }	// namespace cpp14_concepts
 
@@ -129,6 +130,32 @@ constexpr bool convertible_to =
 
 template <typename T>
 constexpr bool move_constructible = constructible_from<T, T> && convertible_to<T, T>;
+
+template <typename T>
+struct copy_constructible_t
+{
+private:
+	template <typename U,
+		typename = std::enable_if_t<move_constructible<U>>,
+		typename = std::enable_if_t<constructible_from<U, U&>>,
+		typename = std::enable_if_t<convertible_to<U&, U>>,
+		typename = std::enable_if_t<constructible_from<U, const U&>>,
+		typename = std::enable_if_t<convertible_to<const U&, U>>,
+		typename = std::enable_if_t<constructible_from<U, const U>>,
+		typename = std::enable_if_t<convertible_to<const U, U>>
+	>
+	static auto test(int) -> std::true_type;
+
+	template <typename U>
+	static auto test(...) -> std::false_type;
+
+public:
+	using type = decltype(test<T>(0));
+};
+
+template <typename T>
+constexpr bool copy_constructible =
+	copy_constructible_t<T>::type::value;
 
 }	// namespace cpp14_concepts
 

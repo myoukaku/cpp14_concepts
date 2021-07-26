@@ -41,6 +41,7 @@ struct A
 
 struct B
 {
+	B(const B&) = delete;
 	B(B&&) {}
 };
 
