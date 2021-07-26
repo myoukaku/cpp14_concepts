@@ -21,8 +21,10 @@ static_assert(!cpp14_concepts::default_initializable<int()>, "");
 static_assert( cpp14_concepts::default_initializable<int(*)()>, "");
 static_assert(!cpp14_concepts::default_initializable<int(&)()>, "");
 
+#if !(defined(_MSC_VER) && (_MSC_VER < 1920))
 static_assert(!cpp14_concepts::default_initializable<const int>, "");
 static_assert(!cpp14_concepts::default_initializable<const int[2]>, "");
+#endif
 
 static_assert(!cpp14_concepts::default_initializable<void>, "");
 static_assert( cpp14_concepts::default_initializable<void*>, "");
