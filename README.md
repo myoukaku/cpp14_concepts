@@ -1,22 +1,22 @@
 # cpp14_concepts
 
-- [ ] same_as
-- [ ] derived_from
-- [ ] convertible_to
+- [x] same_as
+- [x] derived_from
+- [x] convertible_to
 - [ ] common_reference_with
 - [ ] common_with
-- [ ] integral
-- [ ] signed_integral
-- [ ] unsigned_integral
-- [ ] floating_point
+- [x] integral
+- [x] signed_integral
+- [x] unsigned_integral
+- [x] floating_point
 - [ ] assignable_from
 - [ ] swappable
 - [ ] swappable_with
-- [ ] destructible
-- [ ] constructible_from
-- [ ] default_initializable
-- [ ] move_constructible
-- [ ] copy_constructible
+- [x] destructible
+- [x] constructible_from
+- [x] default_initializable
+- [x] move_constructible
+- [x] copy_constructible
 - [ ] equality_comparable
 - [ ] equality_comparable_with
 - [ ] totally_ordered

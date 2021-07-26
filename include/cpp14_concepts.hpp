@@ -43,6 +43,7 @@ using std::constructible_from;
 using std::default_initializable;
 using std::move_constructible;
 using std::copy_constructible;
+using std::equality_comparable;
 
 }	// namespace cpp14_concepts
 
@@ -156,6 +157,62 @@ public:
 template <typename T>
 constexpr bool copy_constructible =
 	copy_constructible_t<T>::type::value;
+
+template <typename T>
+struct boolean_testable_t
+{
+private:
+	template <typename U,
+		typename = std::enable_if_t<convertible_to<U, bool>>,
+		typename V = decltype(!std::declval<U&&>()),
+		typename = std::enable_if_t<convertible_to<V, bool>>
+	>
+	static auto test(int) -> std::true_type;
+
+	template <typename U>
+	static auto test(...) -> std::false_type;
+
+public:
+	using type = decltype(test<T>(0));
+};
+
+template <typename T>
+constexpr bool boolean_testable =
+	boolean_testable_t<T>::type::value;
+
+template <typename T, typename U>
+struct WeaklyEqualityComparableWith_t
+{
+private:
+	template <
+		typename T2, typename U2,
+		typename TR = const std::remove_reference_t<T2>&,
+		typename UR = const std::remove_reference_t<U2>&,
+		typename B1 = decltype(std::declval<TR>() == std::declval<UR>()),
+		typename B2 = decltype(std::declval<TR>() != std::declval<UR>()),
+		typename B3 = decltype(std::declval<UR>() == std::declval<TR>()),
+		typename B4 = decltype(std::declval<UR>() != std::declval<TR>()),
+		typename = std::enable_if_t<boolean_testable<B1>>,
+		typename = std::enable_if_t<boolean_testable<B2>>,
+		typename = std::enable_if_t<boolean_testable<B3>>,
+		typename = std::enable_if_t<boolean_testable<B4>>
+	>
+	static auto test(int) -> std::true_type;
+
+	template <typename T2, typename U2>
+	static auto test(...) -> std::false_type;
+
+public:
+	using type = decltype(test<T, U>(0));
+};
+
+template <typename T, typename U>
+constexpr bool WeaklyEqualityComparableWith =
+	WeaklyEqualityComparableWith_t<T, U>::type::value;
+
+template <typename T>
+constexpr bool equality_comparable =
+	WeaklyEqualityComparableWith<T, T>;
 
 }	// namespace cpp14_concepts
 
