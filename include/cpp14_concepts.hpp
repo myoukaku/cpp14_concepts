@@ -39,6 +39,7 @@ using std::unsigned_integral;
 using std::floating_point;
 using std::destructible;
 using std::constructible_from;
+using std::default_initializable;
 
 }	// namespace cpp14_concepts
 
@@ -79,6 +80,28 @@ constexpr bool destructible = std::is_nothrow_destructible<T>::value;
 template <typename T, typename... Args>
 constexpr bool constructible_from =
 	destructible<T> && std::is_constructible<T, Args...>::value;
+
+template <typename T>
+struct default_initializable_t
+{
+private:
+	template <typename U,
+		typename = std::enable_if_t<constructible_from<U>>,
+		typename = decltype(U{}),
+		typename = decltype(::new U)
+	>
+	static auto test(int) -> std::true_type;
+
+	template <typename U>
+	static auto test(...) -> std::false_type;
+
+public:
+	using type = decltype(test<T>(0));
+};
+
+template <typename T>
+constexpr bool default_initializable =
+	default_initializable_t<T>::type::value;
 
 }	// namespace cpp14_concepts
 
