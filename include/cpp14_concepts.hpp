@@ -41,6 +41,7 @@ using std::floating_point;
 using std::destructible;
 using std::constructible_from;
 using std::default_initializable;
+using std::move_constructible;
 
 }	// namespace cpp14_concepts
 
@@ -125,6 +126,9 @@ public:
 template <typename From, typename To>
 constexpr bool convertible_to =
 	convertible_to_t<From, To>::type::value;
+
+template <typename T>
+constexpr bool move_constructible = constructible_from<T, T> && convertible_to<T, T>;
 
 }	// namespace cpp14_concepts
 
