@@ -308,6 +308,6 @@ struct From {
 	operator To();
 };
 static_assert(!cpp14_concepts::convertible_to<From, To>, "");
-static_assert( std::is_convertible_v<From, To>, "");
+static_assert( std::is_convertible<From, To>::value, "");
 
 }	// namespace convertible_to_test
