@@ -91,6 +91,7 @@ static_assert( cpp14_concepts::default_initializable<A>, "");
 static_assert( cpp14_concepts::default_initializable<B>, "");
 static_assert(!cpp14_concepts::default_initializable<C>, "");
 static_assert(!cpp14_concepts::default_initializable<D>, "");
+static_assert(!cpp14_concepts::default_initializable<E>, "");
 static_assert(!cpp14_concepts::default_initializable<F>, "");
 static_assert( cpp14_concepts::default_initializable<G>, "");
 static_assert( cpp14_concepts::default_initializable<H>, "");

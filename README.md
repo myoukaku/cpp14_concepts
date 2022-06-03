@@ -17,7 +17,7 @@
 - [x] default_initializable
 - [x] move_constructible
 - [x] copy_constructible
-- [ ] equality_comparable
+- [x] equality_comparable
 - [ ] equality_comparable_with
 - [ ] totally_ordered
 - [ ] totally_ordered_with
