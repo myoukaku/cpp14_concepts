@@ -113,8 +113,7 @@ struct convertible_to_t
 private:
 	template <typename F, typename T,
 		typename = std::enable_if_t<std::is_convertible<F, T>::value>,
-		typename Func = std::add_rvalue_reference_t<F> (&)(),
-		typename = decltype(static_cast<T>(std::declval<Func>()()))
+		typename = decltype(static_cast<T>(std::declval<F>()))
 	>
 	static auto test(int) -> std::true_type;
 
